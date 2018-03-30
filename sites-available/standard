@@ -40,10 +40,11 @@ server {
 
 	server_name *.ctfsecurinets.com;
 
-  #modsecurity on;
+	#https://www.howtoforge.com/tutorial/nginx-with-libmodsecurity-and-owasp-modsecurity-core-rule-set-on-ubuntu-1604/
+	#modsecurity on;
 
 	location / {
-    modsecurity_rules_file /etc/nginx/conf.d/modsec_includes.conf;
+		modsecurity_rules_file /etc/nginx/conf.d/modsec_includes.conf;
 		# First attempt to serve request as file, then
 		# as directory, then fall back to displaying a 404.
 		try_files $uri $uri/ =404;
@@ -60,7 +61,7 @@ server {
 		# With php7.0-fpm:
 		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
 		fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-    fastcgi_param DOCUMENT_ROOT $realpath_root;
+		fastcgi_param DOCUMENT_ROOT $realpath_root;
 	}
 
 	# deny access to .htaccess files, if Apache's document root
@@ -70,12 +71,12 @@ server {
 		deny all;
 	}
 
-  location /server-status {
-    stub_status on;
-    access_log   off;
-    allow 127.0.0.1;
-    deny all;
-  }
+	location /server-status {
+		stub_status on;
+		access_log   off;
+		allow 127.0.0.1;
+		deny all;
+	}
 }
 
 
